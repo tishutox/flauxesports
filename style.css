@@ -6,6 +6,7 @@
   --text-clr: #000000;
   --accent-clr: #ae8625;
   --secondary-text-clr: #4a4a4a;
+  --footer-side-gap: min(30px, 7%);
 }
 *{
   margin: 0;
@@ -269,12 +270,9 @@ main p{
 .site-footer{
   background: #000;
   color: #fff;
-}
-.site-footer{
-  background: #000;
-  color: #fff;
   /* Ensure footer starts after the sidebar on desktop */
   grid-column: 2;
+  padding-inline: var(--footer-side-gap);
 }
 .site-footer a{
   color: #fff;
@@ -284,19 +282,34 @@ main p{
   color: var(--accent-clr);
 }
 .footer-inner{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "social logo legal";
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: min(30px, 7%);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(20px, 4vw, 30px) 0;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.footer-social{
+.footer-social,
+.footer-legal,
+.footer-logo{
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.footer-social{ grid-area: social; }
+.footer-logo{ grid-area: logo; }
+.footer-legal{ grid-area: legal; }
+.footer-social{
+  justify-content: flex-start;
   gap: .75rem;
 }
 .footer-social i{
   font-size: 22px;
+}
+.footer-logo{
+  justify-content: center;
 }
 .footer-logo img{
   display: block;
@@ -304,8 +317,7 @@ main p{
   width: auto;
 }
 .footer-legal{
-  display: flex;
-  align-items: center;
+  justify-content: flex-end;
   gap: .5rem;
 }
 .footer-legal .divider{
@@ -314,13 +326,17 @@ main p{
 
 @media(max-width: 800px){
   .footer-inner{
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "logo"
+      "social"
+      "legal";
     text-align: center;
     gap: .75rem;
   }
-  .footer-logo{ order: 1; }
-  .footer-social{ order: 2; }
-  .footer-legal{ order: 3; justify-content: center; }
+  .footer-logo{ justify-content: center; }
+  .footer-social{ justify-content: center; }
+  .footer-legal{ justify-content: center; }
   /* Ensure footer is visible above fixed bottom sidebar */
   .site-footer{ 
     grid-column: 1; 
