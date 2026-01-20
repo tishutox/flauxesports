@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Reggae+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Yuji+Syuku&display=swap');
 :root{
   --base-clr: #000000;
   --line-clr: #2a2a2a;
@@ -52,8 +52,9 @@ body{
   justify-content: flex-end;
   margin-bottom: 16px;
   .logo{
-    font-family: 'Reggae One', cursive;
-    font-weight: 600;
+    font-family: 'Yuji Syuku', serif;
+    font-weight: 700;
+    font-size: 1.3em;
   }
 }
 #sidebar ul li.active a{
