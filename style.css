@@ -14,6 +14,7 @@
 }
 html{
   font-family: 'League Spartan', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
   line-height: 1.5rem;
   font-weight: 700;
 }
@@ -110,6 +111,11 @@ body{
 }
 #sidebar a span, #sidebar .dropdown-btn span{
   flex-grow: 1;
+}
+@media(min-width: 801px){
+  #sidebar a span, #sidebar .dropdown-btn span{
+    transform: translateY(3px);
+  }
 }
 #sidebar a:hover, #sidebar .dropdown-btn:hover{
   background-color: var(--hover-clr);
@@ -543,7 +549,11 @@ main p{
       "social"
       "legal";
     text-align: center;
-    gap: .75rem;
+    grid-template-rows: 1fr auto 0.7fr;
+    align-items: center;
+    gap: 0;
+    min-height: 190px;
+    padding: 0 0 64px 0;
   }
   .footer-logo{ justify-content: center; }
   .footer-social{ justify-content: center; }
@@ -551,6 +561,6 @@ main p{
   /* Ensure footer is visible above fixed bottom sidebar */
   .site-footer{ 
     grid-column: 1; 
-    padding-bottom: 80px; 
+    padding-bottom: 0; 
   }
 }
