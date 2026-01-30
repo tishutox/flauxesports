@@ -543,8 +543,8 @@ main p{
 
 /* Footer Divider */
 .footer-divider{
-  border: none;
-  border-top: 1px solid var(--line-clr);
+  border: 1px solid var(--line-clr);
+  border-width: 1px 0 0 0;
   grid-column: 2;
   margin: 0;
 }
