@@ -41,6 +41,19 @@ body{
   overflow: hidden;
   text-wrap: nowrap;
 }
+@media(max-width: 800px){
+  #sidebar{
+    text-wrap: wrap;
+  }
+  #sidebar a, #sidebar .dropdown-btn{
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  #sidebar a span, #sidebar .dropdown-btn span{
+    word-break: break-word;
+    white-space: normal;
+  }
+}
 #sidebar.close{
   padding: 5px;
   width: 60px;
