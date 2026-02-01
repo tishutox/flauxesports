@@ -550,6 +550,7 @@ main p{
 .footer-legal{
   justify-content: center;
   gap: .5rem;
+  flex-wrap: wrap;
 }
 .footer-legal .divider{
   color: #666;
