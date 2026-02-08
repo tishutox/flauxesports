@@ -45,24 +45,19 @@ function toggleSubMenu(button){
   const isOpen = button.nextElementSibling.classList.contains('show')
   setCaretForButton(button, isOpen)
 
-  // Handle active state for Teams submenu on cs2.html and ow.html (mobile behavior)
   const isMobile = window.innerWidth <= 800
   const isTeamsBtn = button.querySelector('span')?.textContent.trim() === 'Teams'
-  const isCS2Page = window.location.pathname.endsWith('cs2.html')
-  const isOWPage = window.location.pathname.endsWith('ow.html')
-  
-  if(isMobile && isTeamsBtn && (isCS2Page || isOWPage)){
-    // Get the current page's team link (the one with href="#")
-    const teamLink = sidebar.querySelector('.sub-menu a[href="#"]')
-    
+
+  if(isMobile && isTeamsBtn){
+    const currentPage = getCurrentPageName()
+    const currentTeamLink = sidebar.querySelector(`.sub-menu a[href="${currentPage}"]`)
+
     if(isOpen){
-      // Teams submenu opened: remove active from Teams, add to team link
       button.classList.remove('active')
-      if(teamLink) teamLink.classList.add('active')
+      if(currentTeamLink) currentTeamLink.classList.add('active')
     } else {
-      // Teams submenu closed: add active to Teams, remove from team link
       button.classList.add('active')
-      if(teamLink) teamLink.classList.remove('active')
+      if(currentTeamLink) currentTeamLink.classList.remove('active')
     }
   }
 
@@ -120,52 +115,36 @@ document.addEventListener('DOMContentLoaded', () => {
   setTeamActiveState()
 })
 
-// Set Team page active state (CS2 or OW) based on current page
+function getCurrentPageName(){
+  const path = window.location.pathname
+  const lastSegment = path.substring(path.lastIndexOf('/') + 1)
+  return lastSegment || 'index.html'
+}
+
+// Set Team page active state (CS2, OW, MR) based on current page
 function setTeamActiveState(){
   const teamsBtn = Array.from(sidebar.querySelectorAll('.dropdown-btn')).find(btn => btn.querySelector('span')?.textContent.trim() === 'Teams')
+  const currentPage = getCurrentPageName()
+  const teamPages = ['cs2.html', 'ow.html', 'mr.html']
   const isMobile = window.innerWidth <= 800
-  const isCS2Page = window.location.pathname.endsWith('cs2.html')
-  const isOWPage = window.location.pathname.endsWith('ow.html')
-  
-  if(isCS2Page){
-    const cs2Link = sidebar.querySelector('.sub-menu a[href="#"]')
-    
-    if(isMobile){
-      // Mobile: Teams icon active, CS2 not active (submenu closed by default)
-      if(teamsBtn) teamsBtn.classList.add('active')
-      if(cs2Link) cs2Link.classList.remove('active')
-    } else {
-      // Desktop: CS2 active, Teams button active, menu open
-      if(cs2Link) cs2Link.classList.add('active')
-      if(teamsBtn) teamsBtn.classList.add('active')
-      
-      // Open the Teams submenu on desktop
-      const teamsMenu = teamsBtn?.nextElementSibling
-      if(teamsMenu && !teamsMenu.classList.contains('show')){
-        teamsMenu.classList.add('show')
-        teamsBtn.classList.add('rotate')
-        setCaretForButton(teamsBtn, true)
-      }
-    }
-  } else if(isOWPage){
-    const owLink = sidebar.querySelector('.sub-menu a[href="#"]')
-    
-    if(isMobile){
-      // Mobile: Teams icon active, OW not active (submenu closed by default)
-      if(teamsBtn) teamsBtn.classList.add('active')
-      if(owLink) owLink.classList.remove('active')
-    } else {
-      // Desktop: OW active, Teams button active, menu open
-      if(owLink) owLink.classList.add('active')
-      if(teamsBtn) teamsBtn.classList.add('active')
-      
-      // Open the Teams submenu on desktop
-      const teamsMenu = teamsBtn?.nextElementSibling
-      if(teamsMenu && !teamsMenu.classList.contains('show')){
-        teamsMenu.classList.add('show')
-        teamsBtn.classList.add('rotate')
-        setCaretForButton(teamsBtn, true)
-      }
-    }
+
+  if(!teamPages.includes(currentPage)) return
+
+  const currentTeamLink = sidebar.querySelector(`.sub-menu a[href="${currentPage}"]`)
+
+  if(isMobile){
+    if(teamsBtn) teamsBtn.classList.add('active')
+    if(currentTeamLink) currentTeamLink.classList.remove('active')
+    return
+  }
+
+  if(teamsBtn) teamsBtn.classList.add('active')
+  if(currentTeamLink) currentTeamLink.classList.add('active')
+
+  const teamsMenu = teamsBtn?.nextElementSibling
+  if(teamsMenu && !teamsMenu.classList.contains('show')){
+    teamsMenu.classList.add('show')
+    teamsBtn.classList.add('rotate')
+    setCaretForButton(teamsBtn, true)
   }
 }
