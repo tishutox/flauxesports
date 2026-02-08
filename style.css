@@ -53,6 +53,10 @@ body{
     word-break: break-word;
     white-space: normal;
   }
+  
+  #sidebar .dropdown-btn.active i:first-of-type{
+    color: var(--accent-clr);
+  }
 }
 #sidebar.close{
   padding: 5px;
@@ -78,6 +82,17 @@ body{
   fill: var(--accent-clr);
 }
 #sidebar ul li.active a i{
+  color: var(--accent-clr);
+}
+
+#sidebar a.active{
+  color: var(--accent-clr);
+}
+#sidebar a.active i{
+  color: var(--accent-clr);
+}
+
+#sidebar.close .dropdown-btn.active i:first-of-type{
   color: var(--accent-clr);
 }
 
@@ -235,6 +250,21 @@ main p{
   border-radius: 1em;
   margin-bottom: 18px;
   padding: 0;
+  height: auto;
+}
+
+.container.video-hero video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: inherit;
+}
+
+.container.esports-banner {
+  border: none;
+  border-radius: 1em;
+  margin-bottom: 18px;
+  padding: 0;
   min-height: 500px;
   display: flex;
   align-items: center;
@@ -242,7 +272,7 @@ main p{
   overflow: hidden;
 }
 
-.container.video-hero video {
+.container.esports-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -379,6 +409,11 @@ main p{
     border-radius: 1em;
     padding: min(2em, 12%);
     margin-bottom: 12px;
+  }
+  
+  .container.esports-banner {
+    margin-bottom: 12px;
+    min-height: auto;
   }
   
   .hero-section {
